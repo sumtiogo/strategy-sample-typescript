@@ -48,12 +48,16 @@ export class Cart {
         } else if (shipper === "post office") {
             let feeByWeight, size, feeBySize: number;
             feeByWeight = 80 + product.weight * 10;
-            size = product.length * product.width * product.height;
+            size = Cart.size(product);
             feeBySize = size * 0.00002 * 1100;
             return Math.min(feeBySize, feeByWeight);
         } else {
             throw new Error("shipper not exist");
 
         }
+    }
+
+    private static size(product: Product) {
+        return product.length * product.width * product.height;
     }
 }
