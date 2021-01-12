@@ -1,4 +1,4 @@
-import {Cart} from "./cart";
+import {Cart, Product} from "./cart";
 
 describe('Case', function () {
     let blackCat, hsinChu, postOffice: string;
@@ -16,32 +16,32 @@ describe('Case', function () {
     }
 
     it('test black cat with light weight', function () {
-        shippingFee = cart.shippingFee(blackCat, 30, 20, 10, 5);
+        shippingFee = cart.shippingFee(blackCat, new Product(30, 20, 10, 5));
         feeShouldBe(150, shippingFee);
     });
 
     it('test black cat with heavy weight', function () {
-        shippingFee = cart.shippingFee(blackCat, 30, 20, 10, 50);
+        shippingFee = cart.shippingFee(blackCat, new Product(30, 20, 10, 50));
         feeShouldBe(500, shippingFee);
     });
 
     it('test hsin chu with small size', function () {
-        shippingFee = cart.shippingFee(hsinChu, 30, 20, 10, 50);
+        shippingFee = cart.shippingFee(hsinChu, new Product(30, 20, 10, 50));
         feeShouldBe(144, shippingFee);
     });
 
     it('test hsin chu with huge size', function () {
-        shippingFee = cart.shippingFee(hsinChu, 100, 20, 10, 50);
+        shippingFee = cart.shippingFee(hsinChu, new Product(100, 20, 10, 50));
         feeShouldBe(480, shippingFee);
     });
 
     it('test post office by weight', function () {
-        shippingFee = cart.shippingFee(postOffice, 100, 20, 10, 3);
+        shippingFee = cart.shippingFee(postOffice, new Product(100, 20, 10, 3));
         feeShouldBe(110, shippingFee);
     });
 
     it('test post office by size', function () {
-        shippingFee = cart.shippingFee(postOffice, 100, 20, 10, 300);
+        shippingFee = cart.shippingFee(postOffice, new Product(100, 20, 10, 300));
         feeShouldBe(440, shippingFee);
     });
 
