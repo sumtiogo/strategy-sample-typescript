@@ -26,6 +26,11 @@ export class Product {
         this._height = height;
         this._weight = weight;
     }
+
+    size(product: Product) {
+        return product.length * product.width * product.height;
+    }
+
 }
 
 export class Cart {
@@ -48,7 +53,7 @@ export class Cart {
         } else if (shipper === "post office") {
             let feeByWeight, size, feeBySize: number;
             feeByWeight = 80 + product.weight * 10;
-            size = Cart.size(product);
+            size = product.size(product);
             feeBySize = size * 0.00002 * 1100;
             return Math.min(feeBySize, feeByWeight);
         } else {
@@ -57,7 +62,4 @@ export class Cart {
         }
     }
 
-    private static size(product: Product) {
-        return product.length * product.width * product.height;
-    }
 }
