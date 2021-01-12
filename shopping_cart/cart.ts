@@ -20,7 +20,7 @@ export class Cart {
             feeByWeight = 80 + weight * 10;
             size = length * width * height;
             feeBySize = size * 0.00002 * 1100;
-            return feeByWeight < feeBySize ? feeByWeight : feeBySize;
+            return Math.min(feeBySize,feeByWeight);
         } else {
             throw new Error("shipper not exist");
 
