@@ -43,18 +43,15 @@ export class Cart {
                 return 100 + product.weight * 10;
             }
         } else if (shipper === "hsin chu") {
-            let size: number;
-            size = product.length * product.width * product.height;
             if (product.length > 100 || product.width > 100 || product.height > 100) {
-                return size * 0.00002 * 1100 + 500;
+                return product.size(product) * 0.00002 * 1100 + 500;
             } else {
-                return size * 0.00002 * 1200;
+                return product.size(product) * 0.00002 * 1200;
             }
         } else if (shipper === "post office") {
-            let feeByWeight, size, feeBySize: number;
+            let feeByWeight, feeBySize: number;
             feeByWeight = 80 + product.weight * 10;
-            size = product.size(product);
-            feeBySize = size * 0.00002 * 1100;
+            feeBySize = product.size(product) * 0.00002 * 1100;
             return Math.min(feeBySize, feeByWeight);
         } else {
             throw new Error("shipper not exist");
