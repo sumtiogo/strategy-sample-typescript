@@ -37,11 +37,7 @@ export class Cart {
 
     shippingFee(shipper: string, product: Product): number {
         if (shipper === "black cat") {
-            if (product.weight > 20) {
-                return 500;
-            } else {
-                return 100 + product.weight * 10;
-            }
+            return Cart.calculateFeeByBlackCat(product);
         } else if (shipper === "hsin chu") {
             if (product.length > 100 || product.width > 100 || product.height > 100) {
                 return product.size(product) * 0.00002 * 1100 + 500;
@@ -59,4 +55,11 @@ export class Cart {
         }
     }
 
+    private static calculateFeeByBlackCat(product: Product) {
+        if (product.weight > 20) {
+            return 500;
+        } else {
+            return 100 + product.weight * 10;
+        }
+    }
 }
