@@ -41,14 +41,18 @@ export class Cart {
         } else if (shipper === "hsin chu") {
             return Cart.calculateFeeByHsinChu(product);
         } else if (shipper === "post office") {
-            let feeByWeight, feeBySize: number;
-            feeByWeight = 80 + product.weight * 10;
-            feeBySize = product.size(product) * 0.00002 * 1100;
-            return Math.min(feeBySize, feeByWeight);
+            return Cart.calculateFeeByPostOffice(product);
         } else {
             throw new Error("shipper not exist");
 
         }
+    }
+
+    private static calculateFeeByPostOffice(product: Product) {
+        let feeByWeight, feeBySize: number;
+        feeByWeight = 80 + product.weight * 10;
+        feeBySize = product.size(product) * 0.00002 * 1100;
+        return Math.min(feeBySize, feeByWeight);
     }
 
     private static calculateFeeByHsinChu(product: Product) {
