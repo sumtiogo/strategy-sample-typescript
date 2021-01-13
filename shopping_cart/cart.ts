@@ -35,17 +35,17 @@ export class Product {
 
 export class Cart {
 
-    shippingFee(shipper: string, product: Product): number {
-        if (shipper === "black cat") {
-            return Cart.calculateFeeByBlackCat(product);
-        } else if (shipper === "hsin chu") {
-            return Cart.calculateFeeByHsinChu(product);
-        } else if (shipper === "post office") {
-            return Cart.calculateFeeByPostOffice(product);
-        } else {
-            throw new Error("shipper not exist");
+    private readonly shipperFeeDictionary = {
+        "black cat": Cart.calculateFeeByBlackCat,
+        "hsin chu": Cart.calculateFeeByHsinChu,
+        "post office": Cart.calculateFeeByPostOffice
+    }
 
+    shippingFee(shipper: string, product: Product): number {
+        if (shipper in this.shipperFeeDictionary) {
+            return this.shipperFeeDictionary[shipper](product);
         }
+        throw new Error("shipper not exist");
     }
 
     private static calculateFeeByPostOffice(product: Product) {
