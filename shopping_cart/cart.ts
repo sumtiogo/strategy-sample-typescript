@@ -39,11 +39,7 @@ export class Cart {
         if (shipper === "black cat") {
             return Cart.calculateFeeByBlackCat(product);
         } else if (shipper === "hsin chu") {
-            if (product.length > 100 || product.width > 100 || product.height > 100) {
-                return product.size(product) * 0.00002 * 1100 + 500;
-            } else {
-                return product.size(product) * 0.00002 * 1200;
-            }
+            return Cart.calculateFeeByHsinChu(product);
         } else if (shipper === "post office") {
             let feeByWeight, feeBySize: number;
             feeByWeight = 80 + product.weight * 10;
@@ -52,6 +48,14 @@ export class Cart {
         } else {
             throw new Error("shipper not exist");
 
+        }
+    }
+
+    private static calculateFeeByHsinChu(product: Product) {
+        if (product.length > 100 || product.width > 100 || product.height > 100) {
+            return product.size(product) * 0.00002 * 1100 + 500;
+        } else {
+            return product.size(product) * 0.00002 * 1200;
         }
     }
 
