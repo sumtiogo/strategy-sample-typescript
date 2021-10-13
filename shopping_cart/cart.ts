@@ -11,7 +11,7 @@ export class Product {
   }
 }
 
-enum Shipper {
+const enum Shipper {
   BlackCat = 'black cat',
   HsinChu = 'hsin chu',
   PostOffice = 'post office',
