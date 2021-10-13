@@ -26,10 +26,7 @@ export class Cart {
   };
 
   static shippingFee(shipper: Shipper, product: Product): number {
-    if (shipper in Cart.shipperFeeDictionary) {
-      return Cart.shipperFeeDictionary[shipper](product);
-    }
-    throw new Error('shipper not exist');
+    return Cart.shipperFeeDictionary[shipper](product);
   }
 
   private static calculateFeeByPostOffice(product: Product) {
